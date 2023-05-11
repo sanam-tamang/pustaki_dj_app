@@ -17,7 +17,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.254.169', '127.0.0.1']
+ALLOWED_HOSTS = ['pustaki-production.up.railway.app']
 #custom user
 AUTH_USER_MODEL = "account.User"
 
@@ -81,7 +81,7 @@ DATABASES = {
         'USER':  os.environ['USER'],
         'PASSWORD': os.environ['PASSWORD'],
         'HOST':  os.environ['HOST'],
-        'PORT':  os.environ['PORT'],
+        'PORT':  os.environ[''],
     }
 }
 
