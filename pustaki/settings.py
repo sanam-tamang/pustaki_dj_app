@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+import dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':  os.environ.get('DATABASE_NAME'),
-        'USER':  os.environ.get('USER'),
+        'USER':  os.environ.get('HOST_USER'),
         'PASSWORD': os.environ.get('PASSWORD'),
         'HOST':  os.environ.get('HOST'),
         'PORT':  os.environ.get('PORT'),
