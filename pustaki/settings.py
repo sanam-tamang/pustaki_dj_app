@@ -139,7 +139,7 @@ SESSION_COOKIE_SECURE = True
 
 MEDIA_URL = '/media2/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media2/')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media2/')
 
 
 
