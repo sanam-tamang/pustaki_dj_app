@@ -5,6 +5,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate, login, logout
 from tokengen.models import get_tokens_for_user
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.parsers import FileUploadParser
 
 class UserDetail(APIView):
      permission_classes = (IsAuthenticated,)
@@ -13,6 +14,7 @@ class UserDetail(APIView):
         return Response(serializer.data)
 
 class RegisterUserView(APIView):
+     parser_classes = [FileUploadParser]
      def post(self, request):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
