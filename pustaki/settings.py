@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pustaki-production.up.railway.app','127.0.0.1']
+ALLOWED_HOSTS = ['pustakidjapp-production.up.railway.app','127.0.0.1']
 #custom user
 AUTH_USER_MODEL = "account.User"
 
