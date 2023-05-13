@@ -33,7 +33,6 @@ class LoginView(APIView):
         if user:
             login(request,user)
             return Response({
-                'user': user,
                 'token':  get_tokens_for_user(user)} , status= status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid email or password'}, status=status.HTTP_400_BAD_REQUEST)
