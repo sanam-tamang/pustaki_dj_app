@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegistrationSerializer, UserDetailSerializer
+from .serializers import UserLoginSerializer, UserRegistrationSerializer, UserDetailSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login, logout
 from tokengen.models import get_tokens_for_user
@@ -29,12 +29,15 @@ class LoginView(APIView):
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
+        serializer = UserDetailSerializer(request.data)
         user = authenticate(email=email, password=password)
         if user:
             login(request,user)
-            return Response({'token':  get_tokens_for_user(user)} , status= status.HTTP_200_OK)
+            return Response({
+                'user': serializer.data,
+                'token':  get_tokens_for_user(user)} , status= status.HTTP_200_OK)
         else:
-            return Response({'message': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Invalid email or password'}, status=status.HTTP_400_BAD_REQUEST)
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
