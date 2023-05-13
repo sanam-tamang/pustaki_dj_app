@@ -15,8 +15,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    authors = AuthorSerializer(many=True)
-    category = CategorySerializer(many=True)
+    authors = AuthorSerializer(many=False)
+    category = CategorySerializer(many=False)
     published_by =  UserDetailSerializer(many=False, read_only=True)
     class Meta:
         model = Book

@@ -13,10 +13,10 @@ class Book(models.Model):
     id = models.UUIDField(primary_key=True,default= uuid.uuid4,editable=False)
     title = models.CharField(max_length=155,  null=False)
     description = models.TextField(max_length=5000)
-    authors = models.ManyToManyField(Author, )
+    authors = models.ForeignKey(Author,on_delete=models.CASCADE, )
     document = models.FileField(upload_to='files/', null=False)
     image = models.ImageField(upload_to='images/', null=False)
-    category = models.ManyToManyField(Category, )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, )
     published_by = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     published_date = models.DateField(auto_now_add=True, )
 
