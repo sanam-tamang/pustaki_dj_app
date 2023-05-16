@@ -5,7 +5,6 @@ import uuid
 class Author(models.Model):
     id = models.UUIDField(primary_key=True,default= uuid.uuid1,editable=False)
     name = models.CharField(max_length=155)
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
 class Category(models.Model):
     id = models.UUIDField(primary_key=True,default= uuid.uuid1,editable=False)
     name = models.CharField(max_length=155, null=False)
