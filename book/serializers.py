@@ -4,7 +4,7 @@ from account.serializers import UserDetailSerializer
 from .models import *
 import uuid
 class AuthorSerializer(serializers.ModelSerializer):
-    user = UserDetailSerializer(read_only=True, many=False)
+    created_by = UserDetailSerializer(read_only=True, many=False)
     class Meta:
         model = Author
         fields = '__all__'
