@@ -4,6 +4,7 @@ from account.serializers import UserDetailSerializer
 from .models import *
 import uuid
 class AuthorSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField()
     class Meta:
         model = Author
         fields = '__all__'
@@ -17,25 +18,17 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer()
-    category = CategorySerializer()
-    published_by =  UserDetailSerializer(read_only=True, many=False)
+    # category = CategorySerializer()
+    # published_by =  UserDetailSerializer(read_only=True, many=False)
     class Meta:
         model = Book
         fields = '__all__'
     def create(self,validated_data):
         authors_data= validated_data.pop('authors')
-        category_data= validated_data.pop('category')
-        user_data= validated_data.pop('published_by')
        
-        try:
-            category = Category.objects.get(id=category_data['id'])
-        except Category.DoesNotExist:
-            raise Exception("Category Doesnot exists")
+       
         
-        try:
-            user = User.objects.get(id=user_data['id'])
-        except User.DoesNotExist:
-            raise Exception("User Doesnot exists")
+       
         
         try:
             author = Author.objects.get(id=authors_data['id'])
@@ -44,7 +37,7 @@ class BookSerializer(serializers.ModelSerializer):
             author.save()
           
         
-        book = Book.objects.create(authors=author, category=category, published_by=user, **validated_data)
+        book = Book.objects.create(authors=author, **validated_data)
         return book
         
 
