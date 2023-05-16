@@ -2,7 +2,6 @@ from rest_framework import serializers
 from account.serializers import UserDetailSerializer
 
 from .models import *
-import uuid
 class AuthorSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField()
     class Meta:
@@ -27,9 +26,8 @@ class BookSerializer(serializers.ModelSerializer):
         try:
             author = Author.objects.get(id=authors_data['id'])
         except Author.DoesNotExist:
-            author = Author(id=uuid.uuid1, name= authors_data['name'])
-            author.save()
-
+            author = Author.objects.create(**authors_data)
+           
         book = Book.objects.create(authors=author, **validated_data)
         return book
     
