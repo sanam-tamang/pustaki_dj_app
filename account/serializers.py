@@ -23,5 +23,5 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 class UserDetailSerializer(serializers.ModelSerializer):
      class Meta:
           model = User
-          fields = ['id', 'email','first_name', 'last_name', 'last_login','image','is_activate','is_admin','created_at','updated_at' ]
+          fields = ['id', 'email','first_name', 'last_name', 'last_login','image','is_active','is_admin','created_at','updated_at' ]
        
