@@ -8,14 +8,7 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = '__all__'
-    def create(self,validated_data):
-        user_data= validated_data.pop('created_by')
-        try:
-            user = User.objects.get(id=user_data['id'])
-        except User.DoesNotExist:
-            raise ValueError("User Doesnot exists")
-        author = Author.objects.create(created_by=user, **validated_data)
-        return author
+   
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,7 +30,7 @@ class BookSerializer(serializers.ModelSerializer):
         try:
             author = Author.objects.get(id=authors_data['id'])
         except Author.DoesNotExist:
-            author = Author(id=uuid.uuid4, name= authors_data['name'] , created_by = authors_data['created_by'])
+            author = Author(id=uuid.uuid1, name= authors_data['name'] , created_by = authors_data['created_by'])
             author.save()
           
         try:
