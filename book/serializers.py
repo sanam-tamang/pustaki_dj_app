@@ -17,7 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer()
     category = CategorySerializer()
-    published_by =  UserDetailSerializer()
+    published_by =  UserDetailSerializer(read_only=True, many=False)
     class Meta:
         model = Book
         fields = '__all__'
