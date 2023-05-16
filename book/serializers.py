@@ -27,12 +27,7 @@ class BookSerializer(serializers.ModelSerializer):
         authors_data= validated_data.pop('authors')
         category_data= validated_data.pop('category')
         user_data= validated_data.pop('published_by')
-        try:
-            author = Author.objects.get(id=authors_data['id'])
-        except Author.DoesNotExist:
-            author = Author(id=uuid.uuid1, name= authors_data['name'] , created_by = authors_data['created_by'])
-            author.save()
-          
+       
         try:
             category = Category.objects.get(id=category_data['id'])
         except Category.DoesNotExist:
@@ -42,6 +37,13 @@ class BookSerializer(serializers.ModelSerializer):
             user = User.objects.get(id=user_data['id'])
         except User.DoesNotExist:
             raise ValueError("User Doesnot exists")
+        
+        try:
+            author = Author.objects.get(id=authors_data['id'])
+        except Author.DoesNotExist:
+            author = Author(id=uuid.uuid1, name= authors_data['name'] , created_by = user)
+            author.save()
+          
         
         book = Book.objects.create(authors=author, category=category, published_by=user, **validated_data)
         return book
