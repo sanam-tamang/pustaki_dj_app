@@ -4,9 +4,18 @@ from account.serializers import UserDetailSerializer
 from .models import *
 import uuid
 class AuthorSerializer(serializers.ModelSerializer):
+    user = UserDetailSerializer(read_only=True, many=False)
     class Meta:
         model = Author
         fields = '__all__'
+    def create(self,validated_data):
+        user_data= validated_data.pop('created_by')
+        try:
+            user = User.objects.get(id=user_data['id'])
+        except User.DoesNotExist:
+            raise ValueError("User Doesnot exists")
+        author = Author.objects.create(created_by=user, **validated_data)
+        return author
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
