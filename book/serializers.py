@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from account.serializers import UserDetailSerializer
-
 from .models import *
+
 class AuthorSerializer(serializers.ModelSerializer):
     id = serializers.UUIDField()
     class Meta:
@@ -16,7 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    authors = AuthorSerializer()
+    authors = AuthorSerializer(many=False)
     class Meta:
         model = Book
         fields = '__all__'
