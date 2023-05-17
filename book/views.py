@@ -5,7 +5,7 @@ from .serializers import *
 from .models import *
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.parsers import MultiPartParser, FormParser
 # from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -18,7 +18,7 @@ class GetBooksView(APIView):
       
 class AddBookView(APIView):
     permission_classes = [IsAuthenticated]
-    parser_classes = [FormParser, MultiPartParser, JSONParser]
+    parser_classes = [FormParser, MultiPartParser]
 
     def post(self, request):
         serializer = BookSerializer(data=request.data)
