@@ -6,7 +6,7 @@ from account.serializers import UserDetailSerializer
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ['id','name']
 
 #this is for post
 class BookSerializer(serializers.ModelSerializer):
