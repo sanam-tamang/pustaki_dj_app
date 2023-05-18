@@ -13,7 +13,7 @@ class GetBooksView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self,request):
         books = Book.objects.all()
-        serializers = BookSerializer(books, many=True)
+        serializers = BookSerializerOnGet(books, many=True)
         return Response (serializers.data, status=status.HTTP_200_OK)
       
 class AddBookView(APIView):
@@ -29,7 +29,7 @@ class AddBookView(APIView):
 
 
 
-class  AddtCategoryView(APIView):
+class  AddCategoryView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
