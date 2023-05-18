@@ -6,8 +6,6 @@ from .models import *
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
-# from rest_framework_simplejwt.authentication import JWTAuthentication
-
 
 class GetBooksView(APIView):
     permission_classes = [IsAuthenticated]
@@ -15,17 +13,20 @@ class GetBooksView(APIView):
         books = Book.objects.all()
         serializers = BookSerializerOnGet(books, many=True)
         return Response (serializers.data, status=status.HTTP_200_OK)
-      
+
+
 class AddBookView(APIView):
-    permission_classes = [IsAuthenticated]
-    parser_classes = [FormParser, MultiPartParser]
+    parser_classes = [MultiPartParser,FormParser]
 
     def post(self, request):
+        request.data['document'].name = content_file_name(request.data['document'], request.data['document'].name)
+        request.data['image'].name = content_file_name(request.data['image'], request.data['image'].name)
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
