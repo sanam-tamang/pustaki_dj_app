@@ -16,7 +16,7 @@ class BookSerializer(serializers.ModelSerializer):
     
 ## this is for get 
 class BookSerializerOnGet(serializers.ModelSerializer):
-    Category = CategorySerializer(many=False, read_only=True)
+    category = CategorySerializer(many=False, read_only=True)
     published_by = UserDetailSerializer(many=False, read_only=True)
     class Meta:
         model = Book
