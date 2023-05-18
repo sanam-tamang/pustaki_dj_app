@@ -1,7 +1,11 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
-
+import os
+def content_file_name(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % ( uuid.uuid4(), ext)
+    return os.path.join('uploads', filename)
 #  Custom User Manager
 class UserManager(BaseUserManager):
   def create_user(self, email, first_name, last_name,image, password=None):
@@ -48,7 +52,7 @@ class User(AbstractBaseUser):
   )
   first_name = models.CharField(max_length=155, default='')
   last_name = models.CharField(max_length=155, default='')
-  image = models.ImageField(upload_to='images/', null=True, blank=True)
+  image = models.ImageField(upload_to=content_file_name, null=True, blank=True)
   is_active = models.BooleanField(default=True)
   is_admin = models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True)

@@ -5,6 +5,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate, login, logout
 from tokengen.models import get_tokens_for_user
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from .models import content_file_name
 
 class UserDetail(APIView):
      permission_classes = (IsAuthenticated,)
@@ -14,6 +15,8 @@ class UserDetail(APIView):
 
 class RegisterUserView(APIView):
      def post(self, request):
+        request.data['image'].name = content_file_name(request.data['image'], request.data['image'].name)
+
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
            user = serializer.save()
