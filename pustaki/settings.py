@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['pustakidjapp-production.up.railway.app','127.0.0.1']
 #custom user
@@ -71,16 +71,28 @@ WSGI_APPLICATION = 'pustaki.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':  os.environ.get('DATABASE_NAME'),
-        'USER':  os.environ.get('HOST_USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST':  os.environ.get('HOST'),
-        'PORT':  os.environ.get('PORT'),
+if(DEBUG):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME':  'pustaki6',
+            'USER': 'rootuser',
+            'PASSWORD':'password',
+            'HOST':  'localhost',
+            'PORT':  '3306',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME':  os.environ.get('DATABASE_NAME'),
+            'USER':  os.environ.get('HOST_USER'),
+            'PASSWORD': os.environ.get('PASSWORD'),
+            'HOST':  os.environ.get('HOST'),
+            'PORT':  os.environ.get('PORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -138,8 +150,11 @@ SESSION_COOKIE_SECURE = True
 
 
 MEDIA_URL = '/media2/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media2/')
+if(DEBUG):
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media2/')
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, '/media2/')
+    
 
 
 
