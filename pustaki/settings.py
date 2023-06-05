@@ -71,19 +71,7 @@ WSGI_APPLICATION = 'pustaki.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if(DEBUG):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME':  'pustaki6',
-            'USER': 'rootuser',
-            'PASSWORD':'password',
-            'HOST':  'localhost',
-            'PORT':  '3306',
-        }
-    }
-else:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME':  os.environ.get('DATABASE_NAME'),
@@ -150,10 +138,8 @@ SESSION_COOKIE_SECURE = True
 
 
 MEDIA_URL = '/media2/'
-if(DEBUG):
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media2/')
-else:
-    MEDIA_ROOT = os.path.join(BASE_DIR, '/media2/')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media2/')
     
 
 
