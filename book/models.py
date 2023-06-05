@@ -18,7 +18,7 @@ class Book(models.Model):
     description = models.TextField(max_length=500)
     document = models.FileField(upload_to=content_file_name, null=False)
     image = models.ImageField(upload_to=content_file_name, null=False)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='books')
     published_by = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     published_date = models.DateField(auto_now_add=True, )
 

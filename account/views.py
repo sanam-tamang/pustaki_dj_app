@@ -15,9 +15,8 @@ class UserDetail(APIView):
 
 class RegisterUserView(APIView):
      def post(self, request):
-        
-        if request.data['image'] is not None: 
-            request.data['image'].name = content_file_name(request.data['image'], request.data['image'].name)
+   
+        request.data['image'].name = content_file_name(request.data['image'], request.data['image'].name)
 
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():

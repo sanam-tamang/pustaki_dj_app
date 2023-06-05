@@ -3,9 +3,9 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 import os
 def content_file_name(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % ( uuid.uuid4(), ext)
-    return os.path.join('uploads', filename)
+        ext = filename.split('.')[-1]
+        filename = "%s.%s" % (uuid.uuid4(), ext)
+        return os.path.join('uploads', filename)
 #  Custom User Manager
 class UserManager(BaseUserManager):
   def create_user(self, email, first_name, last_name,image, password=None):

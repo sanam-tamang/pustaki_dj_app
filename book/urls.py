@@ -6,4 +6,8 @@ urlpatterns = [
     path('book/add/', AddBookView.as_view()),
     path('category/add/',AddCategoryView.as_view()),
     path('category/list_category/',GetCategoryListView.as_view()),
+
+    path('book/category/<uuid:category_id>/', GetCategoryWithBookView.as_view(), name='book-by-category'),
+
+
 ]
