@@ -33,7 +33,6 @@ class AddBookView(APIView):
 
 class  AddCategoryView(APIView):
     permission_classes = [IsAuthenticated]
-
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
@@ -52,14 +51,27 @@ class  GetCategoryListView(APIView):
 
 
 #this will help to filter the data base on category_id
-class  GetCategoryWithBookView(ListAPIView):
-    # permission_classes = [IsAuthenticated]
+class  FilterBooksWithCategoryView(ListAPIView):
+     permission_classes = [IsAuthenticated]
      pagination_class = CustomPageNumberPagination
      serializer_class = BookSerializerOnGet
 
      def get_queryset(self):
         category_id = self.kwargs['category_id']
         queryset = Book.objects.filter(category_id=category_id)
+        return queryset
+     
+
+
+#this will help to filter the data base on category_id
+class  FilterBooksWithUserView(ListAPIView):
+     permission_classes = [IsAuthenticated]
+     pagination_class = CustomPageNumberPagination
+     serializer_class = BookSerializerOnGet
+
+     def get_queryset(self):
+        published_by_id = self.kwargs['published_by_id']
+        queryset = Book.objects.filter(published_by_id=published_by_id)
         return queryset
  
    
