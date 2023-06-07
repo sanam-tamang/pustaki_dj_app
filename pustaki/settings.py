@@ -154,7 +154,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ['*']
 CORS_ORIGIN_WHITELIST = (
     'https://pustakidjapp-production.up.railway.app',
-    'http://localhost:45733'
+    'http://localhost:46077'
 )
 CORS_ALLOW_METHODS = (
     "DELETE",
