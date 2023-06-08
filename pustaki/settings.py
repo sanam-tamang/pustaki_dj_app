@@ -11,11 +11,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = ['dfs']
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['pustakidjapp-production.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['pustakidjapp-production.up.railway.app',
+                 '127.0.0.1', '192.168.254.171']
 # custom user
 AUTH_USER_MODEL = "account.User"
 
@@ -122,14 +123,14 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_COOKIE_SECURE = True
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
-# STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static/')
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
