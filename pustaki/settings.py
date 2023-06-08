@@ -121,7 +121,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
 STATIC_URL = 'static/'
 
 # STATICFILES_DIRS = [
